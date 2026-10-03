@@ -13,7 +13,6 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Phone,
   Sparkles,
   Users,
   Moon,
@@ -53,10 +52,9 @@ import { toast } from "sonner";
 
 // Photo placed in public/profile.jpg
 const PROFILE_PHOTO: string | null = "/profile.jpg";
-// Resume PDF URL or mailto fallback
-const RESUME_URL: string | null = null;
+// Downloadable resume PDF placed in public/Rabiya_Bushra_Resume.pdf
+const RESUME_URL: string = "/Rabiya_Bushra_Resume.pdf";
 const EMAIL = "rabiyabushram1ga23cs130@gmail.com";
-const PHONE = "8431445615";
 const GITHUB_URL = "https://github.com/rabiyabushra";
 const LINKEDIN_URL = "https://linkedin.com/in/rabiya-bushra";
 const COLLEGE = "Global Academy of Technology (VTU), Bengaluru";
@@ -135,7 +133,15 @@ const skills: { title: string; icon: LucideIcon; items: string[] }[] = [
   {
     title: "Data / AI / ML",
     icon: BrainCircuit,
-    items: ["Pandas", "Scikit-Learn", "XGBoost", "SHAP", "Random Forest", "Power BI", "Data Cleaning & EDA"],
+    items: [
+      "Pandas",
+      "Scikit-Learn",
+      "XGBoost",
+      "SHAP",
+      "Random Forest",
+      "Power BI",
+      "Data Cleaning & EDA",
+    ],
   },
   {
     title: "Cloud & DevOps",
@@ -150,11 +156,23 @@ const skills: { title: string; icon: LucideIcon; items: string[] }[] = [
 ];
 
 const certifications = [
-  { name: "Google Cloud Career Launchpad — Cloud Engineer Track", provider: "Google Cloud", featured: true },
+  {
+    name: "Google Cloud Career Launchpad — Cloud Engineer Track",
+    provider: "Google Cloud",
+    featured: true,
+  },
   { name: "Applied Generative AI Certification", provider: "Infosys Springboard", featured: true },
   { name: "AI-first Software Engineering", provider: "Infosys Springboard", featured: true },
-  { name: "TechA Python Programming Foundation Certification", provider: "Infosys Springboard", featured: true },
-  { name: "Academic Cohort India – Automation Developer Associate Training", provider: "UiPath", featured: true },
+  {
+    name: "TechA Python Programming Foundation Certification",
+    provider: "Infosys Springboard",
+    featured: true,
+  },
+  {
+    name: "Academic Cohort India – Automation Developer Associate Training",
+    provider: "UiPath",
+    featured: true,
+  },
   { name: "Operating Systems Basics", provider: "Cisco Networking Academy", featured: true },
   { name: "Introduction to Cloud Computing", provider: "Infosys Springboard", featured: false },
   { name: "Introduction to OpenAI GPT Models", provider: "Infosys Springboard", featured: false },
@@ -169,7 +187,15 @@ const experiences = [
     type: "Virtual Internship",
     date: "July 2026",
     badge: "Cybersecurity & VAPT",
-    tags: ["Cybersecurity", "Networking", "Linux", "Vulnerability Assessment", "Web Security", "OWASP", "VAPT"],
+    tags: [
+      "Cybersecurity",
+      "Networking",
+      "Linux",
+      "Vulnerability Assessment",
+      "Web Security",
+      "OWASP",
+      "VAPT",
+    ],
     points: [
       "Completed a one-month virtual internship in Cybersecurity from 1 July to 31 July 2026.",
       "Gained practical exposure to Cybersecurity, Networking, Linux, Vulnerability Assessment, Web Security, OWASP, and VAPT.",
@@ -287,17 +313,18 @@ const allProjects: Project[] = [
     github: "https://github.com/rabiyabushra/Smart-Energy-ML",
   },
   {
-    title: "Homely Hub",
+    title: "Homely Hub – Resort Booking",
     category: "fullstack",
     icon: Home,
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB"],
+    tech: ["HTML", "CSS", "JavaScript", "React.js", "MongoDB"],
     problem:
-      "Users need a seamless, intuitive platform to discover rental properties, view amenity details, and manage bookings effortlessly.",
+      "Users need an intuitive, responsive platform to discover resort accommodations, explore amenities, and book stays.",
     approach:
-      "Developed a complete MERN platform with property listings, interactive detail pages, booking management flows, and backend database integration.",
+      "Developed a resort booking web application during an internship featuring location-based listings, component-driven UI, and MongoDB backend integration.",
     outcome:
-      "Delivered a responsive, database-driven property discovery and booking application demonstrating end-to-end full-stack development.",
+      "Delivered a responsive resort booking platform with location-based listings and an optimized, intuitive UI.",
     github: "https://github.com/rabiyabushra/HomelyHub",
+    badge: "Internship Project",
   },
   {
     title: "ChromaFind — Spot the Shade",
@@ -377,10 +404,14 @@ function SectionHeading({ title, intro, tag }: { title: string; intro?: string; 
             {tag}
           </span>
         )}
-        <h2 className="text-3xl font-semibold tracking-normal text-foreground sm:text-4xl">{title}</h2>
+        <h2 className="text-3xl font-semibold tracking-normal text-foreground sm:text-4xl">
+          {title}
+        </h2>
         <span className="mt-4 block h-0.5 w-14 bg-primary" aria-hidden="true" />
       </div>
-      {intro && <p className="max-w-xl text-sm leading-7 text-muted-foreground md:text-right">{intro}</p>}
+      {intro && (
+        <p className="max-w-xl text-sm leading-7 text-muted-foreground md:text-right">{intro}</p>
+      )}
     </div>
   );
 }
@@ -462,22 +493,15 @@ function ThemeToggle() {
 }
 
 function ResumeButton({ className }: { className: string }) {
-  const handleResumeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!RESUME_URL) {
-      e.preventDefault();
-      navigator.clipboard?.writeText(EMAIL);
-      toast.success("Resume request drafted! Email copied to clipboard: " + EMAIL);
-      window.location.href = `mailto:${EMAIL}?subject=Resume%20Request%20for%20Rabiya%20Bushra%20M`;
-    }
-  };
-
-  return RESUME_URL ? (
-    <a href={RESUME_URL} download className={className} target="_blank" rel="noreferrer">
+  return (
+    <a
+      href={RESUME_URL}
+      download="Rabiya_Bushra_Resume.pdf"
+      className={className}
+      target="_blank"
+      rel="noreferrer"
+    >
       <FileDown size={17} aria-hidden="true" /> Download Resume
-    </a>
-  ) : (
-    <a href={`mailto:${EMAIL}?subject=Resume%20Request`} onClick={handleResumeClick} className={className}>
-      <FileDown size={17} aria-hidden="true" /> Request Resume
     </a>
   );
 }
@@ -509,46 +533,6 @@ function ProfilePhoto() {
               <span className="text-gradient text-6xl font-bold sm:text-7xl">RB</span>
             </div>
           )}
-
-          {/* Bottom gradient overlay with role */}
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/60 to-transparent p-4 pt-12">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-mono text-xs font-semibold uppercase tracking-wider text-primary">Global Academy of Tech</p>
-                <p className="text-sm font-semibold text-foreground">Computer Science & Eng.</p>
-              </div>
-              <span className="rounded-full border border-primary/40 bg-accent px-2.5 py-0.5 font-mono text-xs font-bold text-accent-foreground">
-                9.48 CGPA
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating Developer Badge: 3 Internships */}
-        <div className="absolute -left-4 top-6 hidden items-center gap-2 rounded-lg border border-border bg-card/95 px-3 py-2 shadow-lg backdrop-blur-md sm:flex">
-          <BriefcaseBusiness className="h-4 w-4 text-primary" />
-          <div className="text-left font-mono">
-            <span className="block text-[10px] uppercase text-muted-foreground">Experience</span>
-            <span className="text-xs font-bold text-foreground">3 Internships</span>
-          </div>
-        </div>
-
-        {/* Floating Developer Badge: Cybersecurity & VAPT */}
-        <div className="absolute -right-4 top-24 hidden items-center gap-2 rounded-lg border border-border bg-card/95 px-3 py-2 shadow-lg backdrop-blur-md sm:flex">
-          <ShieldCheck className="h-4 w-4 text-emerald-500" />
-          <div className="text-left font-mono">
-            <span className="block text-[10px] uppercase text-muted-foreground">Security</span>
-            <span className="text-xs font-bold text-foreground">OWASP & VAPT</span>
-          </div>
-        </div>
-
-        {/* Floating Availability Pill */}
-        <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-emerald-500/40 bg-background/95 px-4 py-1.5 font-mono text-xs font-medium text-emerald-500 shadow-xl backdrop-blur-md flex items-center gap-2">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
-          </span>
-          <span>Open for Opportunities</span>
         </div>
       </div>
     </div>
@@ -607,7 +591,7 @@ function DeveloperTerminal() {
           "✓ 1. Proven Full-Stack Depth: Built end-to-end MERN & Spring Boot applications with clean architecture.",
           "✓ 2. Security-Aware Engineer: Real hands-on VAPT, OWASP Top 10, and cryptographic search implementation.",
           "✓ 3. Exceptional Academic Rigor: Consistent 9.48 CGPA demonstrating top-tier discipline and fast learning.",
-          "✓ 4. Research & Competitive Track: Co-authored ML paper + Winner DBMS Hackathon 2025 + SIH Shortlist.",
+          "✓ 4. Research & Competitive Track: Co-authored ML paper + Winner DBMS Hackathon 2025 + Shortlisted in SIH 2026 Internal Hackathon (College Level).",
           "✓ 5. Immediate Value: High work ethic, proactive communication, and readiness to contribute to production code.",
         ];
         break;
@@ -615,7 +599,6 @@ function DeveloperTerminal() {
         response = [
           `[${timestamp}] $ cat ~/.contact_info`,
           `• Email:    ${EMAIL}`,
-          `• Phone:    +91 ${PHONE}`,
           `• LinkedIn: ${LINKEDIN_URL}`,
           `• GitHub:   ${GITHUB_URL}`,
           `• Location: Bengaluru, Karnataka, India`,
@@ -633,7 +616,7 @@ function DeveloperTerminal() {
           "  internships  - Summary of 3 completed industry internships",
           "  skills       - Complete technical toolkit breakdown",
           "  why-hire     - Recruiter highlights & competitive edge",
-          "  contact      - Reach out directly via email, phone, or LinkedIn",
+          "  contact      - Reach out directly via email or LinkedIn",
           "  clear        - Reset terminal window",
         ];
         break;
@@ -655,7 +638,9 @@ function DeveloperTerminal() {
           <span className="h-3 w-3 rounded-full bg-red-500/80 inline-block" />
           <span className="h-3 w-3 rounded-full bg-yellow-500/80 inline-block" />
           <span className="h-3 w-3 rounded-full bg-green-500/80 inline-block" />
-          <span className="ml-3 font-semibold text-muted-foreground">rabiya@developer-console:~ (zsh)</span>
+          <span className="ml-3 font-semibold text-muted-foreground">
+            rabiya@developer-console:~ (zsh)
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -704,8 +689,8 @@ function DeveloperTerminal() {
               line.startsWith("[") || line.startsWith("rabiya@")
                 ? "text-primary font-bold pt-1"
                 : line.startsWith("•") || line.startsWith("✓")
-                ? "text-gray-200 pl-2"
-                : "text-emerald-400/90 pl-2"
+                  ? "text-gray-200 pl-2"
+                  : "text-emerald-400/90 pl-2"
             }
           >
             {line}
@@ -736,8 +721,11 @@ function Portfolio() {
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
-      { threshold: 0.08 }
+      (entries) =>
+        entries.forEach(
+          (entry) => entry.isIntersecting && entry.target.classList.add("is-visible"),
+        ),
+      { threshold: 0.08 },
     );
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
@@ -753,11 +741,6 @@ function Portfolio() {
     toast.success("Email copied: " + EMAIL);
   };
 
-  const handleCopyPhone = () => {
-    navigator.clipboard?.writeText(PHONE);
-    toast.success("Phone number copied: +91 " + PHONE);
-  };
-
   return (
     <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
       {/* Sticky Navigation Header */}
@@ -769,17 +752,18 @@ function Portfolio() {
         }`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-5 sm:px-8">
-          <a href="#top" className="shrink-0 font-mono text-sm font-bold text-foreground" aria-label="Rabiya Bushra, back to top">
+          <a
+            href="#top"
+            className="shrink-0 font-mono text-sm font-bold text-foreground"
+            aria-label="Rabiya Bushra, back to top"
+          >
             RB<span className="text-primary">.</span>
           </a>
 
-          {/* Availability Status Badge in Header */}
-          <div className="hidden xl:flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
-            Seeking 2026/2027 Roles
-          </div>
-
-          <nav className="ml-auto hidden items-center gap-5 lg:flex" aria-label="Portfolio sections">
+          <nav
+            className="ml-auto hidden items-center gap-5 lg:flex"
+            aria-label="Portfolio sections"
+          >
             {navItems.map(([label, target]) => (
               <a
                 key={target}
@@ -830,15 +814,6 @@ function Portfolio() {
         <div className="mx-auto w-full max-w-7xl">
           <div className="grid items-center gap-12 lg:grid-cols-[1.3fr_0.9fr]" data-reveal>
             <div className="hero-copy order-2 lg:order-1">
-              {/* Recruiter Alert Pill */}
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/40 bg-accent px-3.5 py-1.5 font-mono text-xs font-medium text-accent-foreground">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-                </span>
-                <span>Open for Software Engineer & Cybersecurity Roles</span>
-              </div>
-
               <h1 className="text-5xl font-bold leading-[1.02] tracking-normal text-foreground sm:text-7xl lg:text-[5.2rem]">
                 Rabiya <span className="text-gradient">Bushra M</span>
               </h1>
@@ -848,16 +823,13 @@ function Portfolio() {
               </p>
 
               <p className="mt-6 text-xl font-medium text-foreground/90 sm:text-2xl">
-                Computer Science Undergraduate <span className="text-primary">|</span> Full-Stack & Security Engineer
+                Computer Science Undergraduate <span className="text-primary">|</span> Full-Stack &
+                Security Engineer
               </p>
 
               <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
-                Building secure, resilient software across the stack. 3 completed internships spanning{" "}
-                <span className="font-semibold text-foreground">Cybersecurity (OWASP & VAPT)</span>,{" "}
-                <span className="font-semibold text-foreground">Data Science</span>, and{" "}
-                <span className="font-semibold text-foreground">MERN Full-Stack Development</span>. Maintaining a{" "}
-                <span className="font-semibold text-primary">9.48 CGPA</span> and co-author of AI/ML healthcare
-                accessibility research.
+                Building scalable, secure full-stack applications with the MERN stack and Machine
+                Learning.
               </p>
 
               {/* Core Skill Chips */}
@@ -907,9 +879,6 @@ function Portfolio() {
                 <button type="button" onClick={handleCopyEmail} className="social-link text-left">
                   <Mail size={17} /> {EMAIL}
                 </button>
-                <button type="button" onClick={handleCopyPhone} className="social-link text-left">
-                  <Phone size={17} /> +91 {PHONE}
-                </button>
               </div>
             </div>
 
@@ -922,7 +891,10 @@ function Portfolio() {
       </section>
 
       {/* Recruiter Fast-Track Ribbon / At A Glance */}
-      <section id="snapshot" className="scroll-mt-16 border-b border-border bg-surface px-5 py-16 sm:px-8">
+      <section
+        id="snapshot"
+        className="scroll-mt-16 border-b border-border bg-surface px-5 py-16 sm:px-8"
+      >
         <div className="mx-auto max-w-7xl" data-reveal>
           <div className="rounded-2xl border border-primary/30 bg-card p-6 shadow-xl sm:p-10">
             <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center border-b border-border pb-6">
@@ -956,7 +928,9 @@ function Portfolio() {
 
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               <div className="rounded-xl border border-border bg-secondary/50 p-5">
-                <p className="font-mono text-xs uppercase tracking-wide text-primary">Academic Rigor</p>
+                <p className="font-mono text-xs uppercase tracking-wide text-primary">
+                  Academic Rigor
+                </p>
                 <p className="mt-2 text-3xl font-bold text-foreground">9.48 CGPA</p>
                 <p className="mt-2 text-xs text-muted-foreground">
                   Global Academy of Technology (VTU) · Graduating 2027 (7th Sem) · Top percentiles.
@@ -964,26 +938,35 @@ function Portfolio() {
               </div>
 
               <div className="rounded-xl border border-border bg-secondary/50 p-5">
-                <p className="font-mono text-xs uppercase tracking-wide text-primary">Practical Experience</p>
+                <p className="font-mono text-xs uppercase tracking-wide text-primary">
+                  Practical Experience
+                </p>
                 <p className="mt-2 text-3xl font-bold text-foreground">3 Internships</p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  Cybersecurity @ ThunderCipher · Data Science @ Future Interns · Full-Stack @ Web Stack Academy.
+                  Cybersecurity @ ThunderCipher · Data Science @ Future Interns · Full-Stack @ Web
+                  Stack Academy.
                 </p>
               </div>
 
               <div className="rounded-xl border border-border bg-secondary/50 p-5">
-                <p className="font-mono text-xs uppercase tracking-wide text-primary">Hackathon Track</p>
+                <p className="font-mono text-xs uppercase tracking-wide text-primary">
+                  Hackathon Track
+                </p>
                 <p className="mt-2 text-3xl font-bold text-foreground">Winner & Finalist</p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  Winner DBMS Hackathon 2025 · Shortlisted Smart India Hackathon (SIH 2025).
+                  Winner DBMS Hackathon 2025 · Shortlisted SIH 2026 Internal Hackathon (College
+                  Level).
                 </p>
               </div>
 
               <div className="rounded-xl border border-border bg-secondary/50 p-5">
-                <p className="font-mono text-xs uppercase tracking-wide text-primary">Security & Cloud</p>
+                <p className="font-mono text-xs uppercase tracking-wide text-primary">
+                  Security & Cloud
+                </p>
                 <p className="mt-2 text-3xl font-bold text-foreground">DevSecOps Mindset</p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  Hands-on VAPT, OWASP Top 10, Linux, AWS Serverless Lambda, and Searchable Encryption.
+                  Hands-on VAPT, OWASP Top 10, Linux, AWS Serverless Lambda, and Searchable
+                  Encryption.
                 </p>
               </div>
             </div>
@@ -991,7 +974,9 @@ function Portfolio() {
             {/* Targeted roles and availability */}
             <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-border/80 bg-accent/30 px-5 py-4">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="font-mono text-xs font-bold uppercase text-primary">Roles Targeted:</span>
+                <span className="font-mono text-xs font-bold uppercase text-primary">
+                  Roles Targeted:
+                </span>
                 {[
                   "Software Development Engineer (SDE)",
                   "Full-Stack Developer",
@@ -1008,7 +993,8 @@ function Portfolio() {
                 ))}
               </div>
               <div className="font-mono text-xs text-muted-foreground">
-                📍 Location: <strong className="text-foreground">Bengaluru, India</strong> (Open to Relocation & Remote)
+                📍 Location: <strong className="text-foreground">Bengaluru, India</strong> (Open to
+                Relocation & Remote)
               </div>
             </div>
           </div>
@@ -1016,7 +1002,10 @@ function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32">
+      <section
+        id="about"
+        className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32"
+      >
         <div className="mx-auto max-w-7xl" data-reveal>
           <SectionHeading
             tag="Background & Drive"
@@ -1026,19 +1015,22 @@ function Portfolio() {
           <div className="grid gap-12 lg:grid-cols-[1.5fr_0.75fr]">
             <div>
               <p className="text-xl leading-9 text-foreground/90 sm:text-2xl sm:leading-10">
-                I am a Computer Science undergraduate graduating in 2027 at Global Academy of Technology, Bengaluru
-                (VTU), currently in my 7th semester with an exceptional <span className="text-primary font-bold">9.48 CGPA</span>.
+                I am a Computer Science undergraduate graduating in 2027 at Global Academy of
+                Technology, Bengaluru (VTU), currently in my 7th semester with an exceptional{" "}
+                <span className="text-primary font-bold">9.48 CGPA</span>.
               </p>
               <p className="mt-6 text-base leading-8 text-muted-foreground sm:text-lg">
-                My approach to software engineering bridges full-stack application development, cloud scalability, and
-                system security. Through 3 dedicated internships, I have built production-ready MERN stack apps,
-                designed high-visibility Power BI data analytics pipelines, and conducted hands-on vulnerability
-                assessment and penetration testing (VAPT) following OWASP guidelines.
+                My approach to software engineering bridges full-stack application development,
+                cloud scalability, and system security. Through 3 dedicated internships, I have
+                built production-ready MERN stack apps, designed high-visibility Power BI data
+                analytics pipelines, and conducted hands-on vulnerability assessment and penetration
+                testing (VAPT) following OWASP guidelines.
               </p>
               <p className="mt-4 text-base leading-8 text-muted-foreground sm:text-lg">
-                I am also a co-author of research on machine learning approaches to healthcare accessibility in India,
-                submitted using NFHS-5 data with XGBoost and SHAP explainability. When building systems, I prioritize
-                clean architecture, secure-by-default workflows, and dependable user experiences.
+                I am also a co-author of research on machine learning approaches to healthcare
+                accessibility in India, submitted using NFHS-5 data with XGBoost and SHAP
+                explainability. When building systems, I prioritize clean architecture,
+                secure-by-default workflows, and dependable user experiences.
               </p>
             </div>
 
@@ -1056,7 +1048,8 @@ function Portfolio() {
               <div className="col-span-2 bg-card p-5">
                 <p className="font-mono text-xs text-muted-foreground">CORE SPECIALIZATIONS</p>
                 <p className="mt-2 text-sm font-medium leading-6 text-foreground">
-                  Full-Stack (MERN / Spring Boot) · AWS Serverless · Cybersecurity (OWASP / VAPT) · Applied ML
+                  Full-Stack (MERN / Spring Boot) · AWS Serverless · Cybersecurity (OWASP / VAPT) ·
+                  Applied ML
                 </p>
               </div>
               <div className="col-span-2 bg-card p-5">
@@ -1069,7 +1062,10 @@ function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32">
+      <section
+        id="skills"
+        className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32"
+      >
         <div className="mx-auto max-w-7xl" data-reveal>
           <SectionHeading
             tag="Capabilities"
@@ -1090,9 +1086,13 @@ function Portfolio() {
                     <group.icon size={18} aria-hidden="true" />
                   </span>
                   <div>
-                    <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">{group.title}</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
+                      {group.title}
+                    </p>
                     {group.title === "Cybersecurity & Systems" && (
-                      <span className="font-mono text-[9px] text-emerald-500 font-semibold">New · ThunderCipher</span>
+                      <span className="font-mono text-[9px] text-emerald-500 font-semibold">
+                        New · ThunderCipher
+                      </span>
                     )}
                   </div>
                 </div>
@@ -1104,7 +1104,10 @@ function Portfolio() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32">
+      <section
+        id="experience"
+        className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32"
+      >
         <div className="mx-auto max-w-7xl" data-reveal>
           <SectionHeading
             tag="Industry Work"
@@ -1168,7 +1171,10 @@ function Portfolio() {
       </section>
 
       {/* Interactive Developer Terminal */}
-      <section id="terminal" className="scroll-mt-16 border-b border-border bg-surface px-5 py-24 sm:px-8 md:py-32">
+      <section
+        id="terminal"
+        className="scroll-mt-16 border-b border-border bg-surface px-5 py-24 sm:px-8 md:py-32"
+      >
         <div className="mx-auto max-w-7xl" data-reveal>
           <SectionHeading
             tag="Interactive Console"
@@ -1180,7 +1186,10 @@ function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32">
+      <section
+        id="projects"
+        className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32"
+      >
         <div className="mx-auto max-w-7xl">
           <div data-reveal>
             <SectionHeading
@@ -1191,7 +1200,9 @@ function Portfolio() {
 
             {/* Category Filter Pills */}
             <div className="mb-8 flex flex-wrap items-center gap-2">
-              <span className="mr-2 font-mono text-xs uppercase text-muted-foreground">Filter:</span>
+              <span className="mr-2 font-mono text-xs uppercase text-muted-foreground">
+                Filter:
+              </span>
               {[
                 ["All Projects", "all"],
                 ["Full-Stack & Web", "fullstack"],
@@ -1209,7 +1220,10 @@ function Portfolio() {
                       : "border-border bg-secondary text-secondary-foreground hover:border-primary/50"
                   }`}
                 >
-                  {label} {cat === "all" ? `(${allProjects.length})` : `(${allProjects.filter((p) => p.category === cat).length})`}
+                  {label}{" "}
+                  {cat === "all"
+                    ? `(${allProjects.length})`
+                    : `(${allProjects.filter((p) => p.category === cat).length})`}
                 </button>
               ))}
             </div>
@@ -1239,7 +1253,9 @@ function Portfolio() {
                         )}
                       </div>
                     </div>
-                    <h3 className="mt-4 text-2xl font-bold sm:text-3xl text-foreground">{project.title}</h3>
+                    <h3 className="mt-4 text-2xl font-bold sm:text-3xl text-foreground">
+                      {project.title}
+                    </h3>
                     <div className="mt-6">
                       <TechList items={project.tech} />
                     </div>
@@ -1268,7 +1284,9 @@ function Portfolio() {
             <>
               <div className="mb-8 mt-24 flex items-end justify-between" data-reveal>
                 <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Archive</p>
+                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+                    Archive
+                  </p>
                   <h3 className="mt-3 text-2xl font-semibold sm:text-3xl">More projects</h3>
                 </div>
                 <span className="font-mono text-xs text-muted-foreground">
@@ -1326,7 +1344,10 @@ function Portfolio() {
       </section>
 
       {/* Certifications Section */}
-      <section id="certifications" className="scroll-mt-16 border-b border-border bg-surface px-5 py-24 sm:px-8 md:py-32">
+      <section
+        id="certifications"
+        className="scroll-mt-16 border-b border-border bg-surface px-5 py-24 sm:px-8 md:py-32"
+      >
         <div className="mx-auto max-w-7xl">
           <div data-reveal>
             <SectionHeading
@@ -1380,7 +1401,10 @@ function Portfolio() {
       </section>
 
       {/* Achievements Section */}
-      <section id="achievements" className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32">
+      <section
+        id="achievements"
+        className="scroll-mt-16 border-b border-border px-5 py-24 sm:px-8 md:py-32"
+      >
         <div className="mx-auto max-w-7xl" data-reveal>
           <SectionHeading
             tag="Recognition"
@@ -1389,11 +1413,15 @@ function Portfolio() {
           />
           <div className="grid gap-4 md:grid-cols-2">
             {[
-              ["Winner", "DBMS Hackathon 2025", "Global Academy of Technology — Ranked 1st for database architecture & optimization."],
+              [
+                "Winner",
+                "DBMS Hackathon 2025",
+                "Global Academy of Technology — Ranked 1st for database architecture & optimization.",
+              ],
               [
                 "Shortlisted",
-                "Smart India Hackathon 2025",
-                "Gamified Sustainable Farming Platform — Shortlisted national round among premier institutes.",
+                "Smart India Hackathon (SIH) 2026",
+                "Our team has been shortlisted in SIH 2026 internal hackathon held at college level (Global Academy of Technology).",
               ],
               [
                 "Participant",
@@ -1406,7 +1434,10 @@ function Portfolio() {
                 "National-level hackathon addressing scalable real-world digital solutions.",
               ],
             ].map(([badge, title, detail]) => (
-              <article key={title} className="card-lift flex gap-5 rounded-lg border border-border bg-card p-6 sm:p-8">
+              <article
+                key={title}
+                className="card-lift flex gap-5 rounded-lg border border-border bg-card p-6 sm:p-8"
+              >
                 <Award className="mt-1 shrink-0 text-primary" size={24} />
                 <div>
                   <span className="rounded bg-accent px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent-foreground font-semibold">
@@ -1422,7 +1453,10 @@ function Portfolio() {
       </section>
 
       {/* Leadership & Activities */}
-      <section id="leadership" className="scroll-mt-16 border-b border-border bg-surface px-5 py-24 sm:px-8 md:py-32">
+      <section
+        id="leadership"
+        className="scroll-mt-16 border-b border-border bg-surface px-5 py-24 sm:px-8 md:py-32"
+      >
         <div className="mx-auto max-w-7xl" data-reveal>
           <SectionHeading
             tag="Initiative & Community"
@@ -1457,7 +1491,9 @@ function Portfolio() {
                   className="card-lift rounded-lg border border-border border-l-4 border-l-primary bg-card p-7"
                 >
                   <LeadershipIcon className="text-primary" size={24} />
-                  <p className="mt-6 font-mono text-xs uppercase font-semibold text-primary">{role as string}</p>
+                  <p className="mt-6 font-mono text-xs uppercase font-semibold text-primary">
+                    {role as string}
+                  </p>
                   <h3 className="mt-1 text-xl font-bold">{area as string}</h3>
                   <p className="mt-3 text-sm leading-6 text-muted-foreground">{org as string}</p>
                 </article>
@@ -1479,8 +1515,8 @@ function Portfolio() {
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
             <div>
               <p className="max-w-xl text-xl leading-9 text-muted-foreground">
-                Whether you have an open full-time position, an internship opportunity, or want to discuss a technical
-                project — my inbox is always open.
+                Whether you have an open full-time position, an internship opportunity, or want to
+                discuss a technical project — my inbox is always open.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -1501,12 +1537,24 @@ function Portfolio() {
 
               {/* Recruiter quick card */}
               <div className="mt-10 rounded-xl border border-border/80 bg-card p-6 shadow-sm">
-                <p className="font-mono text-xs uppercase text-primary font-bold">Fast Recruiter Summary</p>
+                <p className="font-mono text-xs uppercase text-primary font-bold">
+                  Fast Recruiter Summary
+                </p>
                 <div className="mt-3 space-y-2 text-sm text-muted-foreground">
-                  <p>• <strong>Location:</strong> Bengaluru, India (Open to Relocation & Remote)</p>
-                  <p>• <strong>Notice Period / Availability:</strong> Ready for immediate internships & 2027 batch recruitment</p>
-                  <p>• <strong>Primary Languages:</strong> Java, JavaScript, Python, SQL</p>
-                  <p>• <strong>Verified CGPA:</strong> 9.48 / 10.0 (Global Academy of Technology / VTU)</p>
+                  <p>
+                    • <strong>Location:</strong> Bengaluru, India (Open to Relocation & Remote)
+                  </p>
+                  <p>
+                    • <strong>Notice Period / Availability:</strong> Ready for immediate internships
+                    & 2027 batch recruitment
+                  </p>
+                  <p>
+                    • <strong>Primary Languages:</strong> Java, JavaScript, Python, SQL
+                  </p>
+                  <p>
+                    • <strong>Verified CGPA:</strong> 9.48 / 10.0 (Global Academy of Technology /
+                    VTU)
+                  </p>
                 </div>
               </div>
             </div>
@@ -1514,13 +1562,15 @@ function Portfolio() {
             <div className="border-t border-border">
               {[
                 [Mail, "Email", EMAIL, `mailto:${EMAIL}`, handleCopyEmail],
-                [Phone, "Phone", `+91 ${PHONE}`, `tel:+91${PHONE}`, handleCopyPhone],
                 [Linkedin, "LinkedIn", "linkedin.com/in/rabiya-bushra", LINKEDIN_URL, undefined],
                 [Github, "GitHub", "github.com/rabiyabushra", GITHUB_URL, undefined],
               ].map(([Icon, label, value, href, onCopy]) => {
                 const ContactIcon = Icon as typeof Mail;
                 return (
-                  <div key={label as string} className="group flex items-center justify-between border-b border-border py-5">
+                  <div
+                    key={label as string}
+                    className="group flex items-center justify-between border-b border-border py-5"
+                  >
                     <a
                       href={href as string}
                       target={(href as string).startsWith("http") ? "_blank" : undefined}

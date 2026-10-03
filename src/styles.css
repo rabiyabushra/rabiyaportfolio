@@ -102,7 +102,17 @@
     text-rendering: optimizeLegibility;
   }
 
-  body, header, section, article, footer, nav, a, button, input, textarea, span {
+  body,
+  header,
+  section,
+  article,
+  footer,
+  nav,
+  a,
+  button,
+  input,
+  textarea,
+  span {
     transition-property: background-color, border-color, color, box-shadow, opacity, transform;
     transition-duration: 220ms;
     transition-timing-function: ease;
@@ -144,7 +154,9 @@
 [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 650ms ease, transform 650ms ease;
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
 }
 
 [data-reveal].is-visible {
@@ -153,13 +165,26 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 @utility card-lift {
   box-shadow: var(--shadow-card);
-  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background-color 300ms ease;
-  &:hover { transform: translateY(-3px); border-color: color-mix(in oklab, var(--primary) 45%, transparent); }
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 300ms ease;
+  &:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in oklab, var(--primary) 45%, transparent);
+  }
 }
 
 @utility text-gradient {
@@ -176,7 +201,6 @@
 @utility hero-glow {
   background: radial-gradient(34rem 28rem at 80% 50%, var(--glow), transparent 70%);
 }
-
 
 @utility nav-link {
   position: relative;
@@ -195,7 +219,8 @@
     transition: transform 220ms ease;
   }
 
-  &:hover::after, &:focus-visible::after {
+  &:hover::after,
+  &:focus-visible::after {
     transform: scaleX(1);
     transform-origin: left;
   }
@@ -204,19 +229,35 @@
 @utility button-feedback {
   box-shadow: var(--shadow-card);
 
-  &:hover { transform: translateY(-2px); }
-  &:active { transform: translateY(0) scale(0.98); }
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
 }
 
 .hero-copy > * {
   animation: hero-enter 620ms ease both;
 }
-.hero-copy > *:nth-child(2) { animation-delay: 70ms; }
-.hero-copy > *:nth-child(3) { animation-delay: 120ms; }
-.hero-copy > *:nth-child(4) { animation-delay: 170ms; }
-.hero-copy > *:nth-child(5) { animation-delay: 220ms; }
-.hero-copy > *:nth-child(6) { animation-delay: 270ms; }
-.hero-copy > *:nth-child(7) { animation-delay: 320ms; }
+.hero-copy > *:nth-child(2) {
+  animation-delay: 70ms;
+}
+.hero-copy > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+.hero-copy > *:nth-child(4) {
+  animation-delay: 170ms;
+}
+.hero-copy > *:nth-child(5) {
+  animation-delay: 220ms;
+}
+.hero-copy > *:nth-child(6) {
+  animation-delay: 270ms;
+}
+.hero-copy > *:nth-child(7) {
+  animation-delay: 320ms;
+}
 
 @utility terminal-card {
   background-color: oklch(0.12 0.015 250);
@@ -234,13 +275,26 @@
 }
 
 @keyframes hero-enter {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse-subtle {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.03); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.03);
+  }
 }
 
 @utility pulse-subtle {
@@ -248,11 +302,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
-

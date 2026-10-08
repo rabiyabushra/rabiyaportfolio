@@ -126,7 +126,7 @@ Each project card should have a "View on GitHub" button linking to the given rep
 - Community Member – ACM Community Club
 
 8. CONTACT
-   Simple contact section with email (rabiyabushram1ga23cs130@gmail.com), phone (8431445615), LinkedIn and GitHub links, and a short closing line like "Open to full-stack development, machine learning, and research opportunities."
+   Simple contact section with email (rabiyabushram1ga23cs130@gmail.com), LinkedIn and GitHub links, and a short closing line like "Open to full-stack development, machine learning, and research opportunities."
 
 Overall: keep the tone professional but not stiff. The Featured Projects section should be the visual centerpiece of the page — largest, most detailed cards, positioned right after Experience. The "More Projects" section can use smaller, denser cards. Add a sticky top nav linking to each section.
 
